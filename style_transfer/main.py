@@ -1,3 +1,18 @@
+# Copyright 2019 The TensorFlow Hub Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
 import functools
 import os
 
@@ -13,6 +28,7 @@ print("Eager mode enabled: ", tf.executing_eagerly())
 print("GPU available: ", tf.config.list_physical_devices('GPU'))
 
 # @title Define image loading and visualization functions  { display-mode: "form" }
+
 def crop_center(image):
   """Returns a cropped square image."""
   shape = image.shape
@@ -57,15 +73,15 @@ output_image_size = 384  # @param {type:"integer"}
 
 # The content image size can be arbitrary.
 content_img_size = (output_image_size, output_image_size)
-# The style prediction model was trained with image size 256 and it's the 
-# recommended image size for the style image (though, other sizes work as 
+# The style prediction model was trained with image size 256 and it's the
+# recommended image size for the style image (though, other sizes work as
 # well but will lead to different results).
 style_img_size = (256, 256)  # Recommended to keep it at 256.
 
 content_image = load_image(content_image_url, content_img_size)
 style_image = load_image(style_image_url, style_img_size)
 style_image = tf.nn.avg_pool(style_image, ksize=[3,3], strides=[1,1], padding='SAME')
-show_n([content_image, style_image], ['Content image', 'Style image'])
+# show_n([content_image, style_image], ['Content image', 'Style image'])
 
 # Load TF Hub module.
 
@@ -77,7 +93,3 @@ hub_module = hub.load(hub_handle)
 
 outputs = hub_module(tf.constant(content_image), tf.constant(style_image))
 stylized_image = outputs[0]
-
-# Visualize input images and the generated stylized image.
-
-show_n([content_image, style_image, stylized_image], titles=['Original content image', 'Style image', 'Stylized image'])
