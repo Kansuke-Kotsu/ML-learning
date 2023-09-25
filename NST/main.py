@@ -25,28 +25,8 @@ content_weight=1e4 # x 10000
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
-    steps_per_epoch=1,
-    epochs=10,
-    style_weight=1e-2,
-    content_weight=1e4,
-    result_name="results/result_a_1"
-    )
-  
-func. main_logic(
-    content_path=content_path, 
-    style_path=style_path,
-    steps_per_epoch=10,
-    epochs=10,
-    style_weight=1e-2,
-    content_weight=1e4,
-    result_name="result_a_10"
-    )
-
-func. main_logic(
-    content_path=content_path, 
-    style_path=style_path,
     steps_per_epoch=100,
-    epochs=10,
+    epochs=15,
     style_weight=1e-2,
     content_weight=1e4,
     result_name="result_a_100"
@@ -55,31 +35,31 @@ func. main_logic(
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
-    steps_per_epoch=10,
-    epochs=10,
+    steps_per_epoch=100,
+    epochs=15,
     style_weight=1e-3,
-    content_weight=1e3,
-    result_name="result_b_10"
+    content_weight=1e4,
+    result_name="result_b_100"
     )
   
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
-    steps_per_epoch=10,
-    epochs=10,
+    steps_per_epoch=100,
+    epochs=15,
     style_weight=1e-4,
     content_weight=1e4,
-    result_name="result_c_10"
+    result_name="result_c_100"
     )
 
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
-    steps_per_epoch=10,
-    epochs=10,
+    steps_per_epoch=100,
+    epochs=15,
     style_weight=1,
     content_weight=1,
-    result_name="result_d_10"
+    result_name="result_d_100"
     )
 
 # tf.saved_model.save(model, saved_model_dir)
