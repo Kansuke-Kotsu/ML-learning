@@ -68,7 +68,7 @@ def gram_matrix(input_tensor):
 def clip_0_1(image):
   return tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
 
-def main_logic(content_path, style_path, epochs, steps_per_epoch, style_weight, content_weight):
+def main_logic(content_path, style_path, epochs, steps_per_epoch, style_weight, content_weight, result_name):
     # show original image
     content_image = load_img(content_path)
     style_image = load_img(style_path)
@@ -208,15 +208,12 @@ def main_logic(content_path, style_path, epochs, steps_per_epoch, style_weight, 
         display.clear_output(wait=True)
         display.display(tensor_to_image(image))
         print("Train step: {}".format(step))
-        file_name = 'stylized-image2_' + str(step) + '.png'
+        file_name = result_name + str(step) + '.png'
         tensor_to_image(image).save(file_name)
         
     end = time.time()
     print("Total time: {:.1f}".format(end-start))
 
-    # save result
-    file_name = 'stylized-image.png'
-    tensor_to_image(image).save(file_name)
 
             
             
