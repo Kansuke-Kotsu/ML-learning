@@ -22,6 +22,8 @@ style_weight=1e-2  # x 0.01
 content_weight=1e4 # x 10000
 
 # run sequence
+content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
+style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_1.jpeg'
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
@@ -29,37 +31,43 @@ func. main_logic(
     epochs=15,
     style_weight=1e-2,
     content_weight=1e4,
-    result_name="result_a_100"
+    result_name="results/20230927/result_a_100"
     )
 
+content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
+style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_2.jpeg'
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
     steps_per_epoch=100,
     epochs=15,
-    style_weight=1e-3,
+    style_weight=1e-2,
     content_weight=1e4,
-    result_name="result_b_100"
-    )
-  
-func. main_logic(
-    content_path=content_path, 
-    style_path=style_path,
-    steps_per_epoch=100,
-    epochs=15,
-    style_weight=1e-4,
-    content_weight=1e4,
-    result_name="result_c_100"
+    result_name="results/20230927/result_b_100"
     )
 
+content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
+style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_3.jpeg'
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
     steps_per_epoch=100,
     epochs=15,
-    style_weight=1,
-    content_weight=1,
-    result_name="result_d_100"
+    style_weight=1e-2,
+    content_weight=1e4,
+    result_name="results/20230927/result_c_100"
+    )
+
+content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
+style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_4.jpeg'
+func. main_logic(
+    content_path=content_path, 
+    style_path=style_path,
+    steps_per_epoch=100,
+    epochs=15,
+    style_weight=1e-2,
+    content_weight=1e4,
+    result_name="results/20230927/result_d_100"
     )
 
 # tf.saved_model.save(model, saved_model_dir)
