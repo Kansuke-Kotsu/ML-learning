@@ -23,31 +23,7 @@ content_weight=1e4 # x 10000
 
 # run sequence
 content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
-style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_1.jpeg'
-func. main_logic(
-    content_path=content_path, 
-    style_path=style_path,
-    steps_per_epoch=100,
-    epochs=15,
-    style_weight=1e-2,
-    content_weight=1e4,
-    result_name="results/20230927/result_a_100"
-    )
-
-content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
-style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_2.jpeg'
-func. main_logic(
-    content_path=content_path, 
-    style_path=style_path,
-    steps_per_epoch=100,
-    epochs=15,
-    style_weight=1e-2,
-    content_weight=1e4,
-    result_name="results/20230927/result_b_100"
-    )
-
-content_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/temple.jpeg'
-style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_3.jpeg'
+style_path = '/Users/kotsukansuke/Documents/GitHub/ML-learning/NST/images/style_3.png'
 func. main_logic(
     content_path=content_path, 
     style_path=style_path,
