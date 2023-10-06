@@ -34,7 +34,7 @@ func.predict(IMG_SIZE=IMG_SIZE, timesteps=timesteps, model=model)
 func.predict_step(IMG_SIZE=IMG_SIZE, timesteps=timesteps, model=model)
 
 for _ in range(epochs):
-    func.train(X_train=X_train, BATCH_SIZE=BATCH_SIZE, R=1)
+    func.train(X_train=X_train, BATCH_SIZE=BATCH_SIZE, R=1, model=model, timesteps=timesteps, time_bar=time_bar)
     # reduce learning rate for next training
     model.optimizer.learning_rate = max(0.000001, model.optimizer.learning_rate * 0.9)
 

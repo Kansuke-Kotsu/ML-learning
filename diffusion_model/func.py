@@ -125,26 +125,26 @@ def predict_step(IMG_SIZE, timesteps, model):
         if i % 2 == 0:
             xs.append(x[0])
 
-    '''plt.figure(figsize=(20, 2))
+    plt.figure(figsize=(20, 2))
     for i in range(len(xs)):
         plt.subplot(1, len(xs), i+1)
         plt.imshow(cvtImg(xs[i]))
         plt.title(f'{i}')
-        plt.axis('off')'''
+        plt.axis('off')
 
-def train_one(x_img, model):
-    x_ts = generate_ts(len(x_img))
-    x_a, x_b = forward_noise(x_img, x_ts)
+def train_one(x_img, model, timesteps, time_bar):
+    x_ts = generate_ts(len(x_img), timesteps=timesteps)
+    x_a, x_b = forward_noise(x_img, x_ts, time_bar=time_bar)
     loss = model.train_on_batch([x_a, x_ts], x_b)
     return loss
 
-def train(X_train, BATCH_SIZE, R):
+def train(X_train, BATCH_SIZE, R, model, timesteps, time_bar):
     bar = trange(R)
     total = 100
     for i in bar:
         for j in range(total):
             x_img = X_train[np.random.randint(len(X_train), size=BATCH_SIZE)]
-            loss = train_one(x_img)
+            loss = train_one(x_img, model=model, timesteps=timesteps, time_bar=time_bar)
             pg = (j / total) * 100
             if j % 5 == 0:
                 bar.set_description(f'loss: {loss:.5f}, p: {pg:.2f}%')
