@@ -5,6 +5,7 @@ from keras import layers
 import numpy as np
 from tqdm.auto import trange, tqdm
 import matplotlib.pyplot as plt
+from PIL import Image
 
 # normalization image
 def cvtImg(img):
@@ -124,13 +125,13 @@ def predict_step(IMG_SIZE, timesteps, model):
         x = model.predict([x, np.full((8),  t)], verbose=0)
         if i % 2 == 0:
             xs.append(x[0])
-
     plt.figure(figsize=(20, 2))
     for i in range(len(xs)):
         plt.subplot(1, len(xs), i+1)
         plt.imshow(cvtImg(xs[i]))
         plt.title(f'{i}')
         plt.axis('off')
+    return xs
 
 def train_one(x_img, model, timesteps, time_bar):
     x_ts = generate_ts(len(x_img), timesteps=timesteps)
@@ -149,3 +150,34 @@ def train(X_train, BATCH_SIZE, R, model, timesteps, time_bar):
             if j % 5 == 0:
                 bar.set_description(f'loss: {loss:.5f}, p: {pg:.2f}%')
  
+def save_images_as_png(images, output_dir, epoch):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    # imagesは画像のリストです
+    for i, image in enumerate(images):
+        # 保存するファイルパスを生成
+        filename = f"image_{epoch}_{i + 1}.png"
+        file_path = os.path.join(output_dir, filename)
+
+        # 画像をPIL Imageに変換
+        pil_image = Image.fromarray((image * 255).astype('uint8'))
+
+        # PNGファイルとして保存
+        pil_image.save(file_path, format='PNG')
+        print(f"Saved {file_path}")
+        
+def save_models(model_save_path, model):
+    # ベースのモデル保存パス
+    base_model_save_path = model_save_path
+    # ファイル名の初期値
+    model_name = 'my_model'
+    # 重複しないファイル名を生成
+    model_save_path = os.path.join(base_model_save_path, model_name)
+    counter = 1
+    while os.path.exists(model_save_path):
+        model_name = f'my_model_{counter}'
+        model_save_path = os.path.join(base_model_save_path, model_name)
+        counter += 1
+
+    # モデルを指定したパスに保存
+    tf.keras.models.save_model(model, model_save_path)
