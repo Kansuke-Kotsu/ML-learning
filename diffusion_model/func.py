@@ -181,3 +181,22 @@ def save_models(model_save_path, model):
 
     # モデルを指定したパスに保存
     tf.keras.models.save_model(model, model_save_path)
+    print(f"save model as {model_save_path}")
+    
+def load_models(model_save_path):
+    # ベースのモデル保存パス
+    base_model_save_path = model_save_path
+    # ファイル名の初期値
+    model_name = 'my_model_1'
+    # 重複しないファイル名を生成
+    model_save_path = os.path.join(base_model_save_path, model_name)
+    counter = 1
+    while os.path.exists(model_save_path):
+        model_name = f'my_model_{counter}'
+        model_save_path = os.path.join(base_model_save_path, model_name)
+        counter += 1
+    model_name = f'my_model_{counter - 2}'
+    model_save_path = os.path.join(base_model_save_path, model_name)    
+    loaded_model = tf.keras.models.load_model(model_save_path)
+    print(f"... load {model_name} ...")
+    return loaded_model
