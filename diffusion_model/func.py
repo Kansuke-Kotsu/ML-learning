@@ -115,7 +115,7 @@ def predict(IMG_SIZE, timesteps, model, x_idx=None):
     for i in trange(timesteps):
         t = i
         x = model.predict([x, np.full((32), t)], verbose=0)
-    #show_examples(x)
+    return x
     
 def predict_step(IMG_SIZE, timesteps, model):
     xs = []
@@ -125,12 +125,6 @@ def predict_step(IMG_SIZE, timesteps, model):
         x = model.predict([x, np.full((8),  t)], verbose=0)
         if i % 2 == 0:
             xs.append(x[0])
-    plt.figure(figsize=(20, 2))
-    for i in range(len(xs)):
-        plt.subplot(1, len(xs), i+1)
-        plt.imshow(cvtImg(xs[i]))
-        plt.title(f'{i}')
-        plt.axis('off')
     return xs
 
 def train_one(x_img, model, timesteps, time_bar):

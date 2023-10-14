@@ -1,5 +1,6 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import sys
 import tensorflow as tf
 from keras import layers
 import numpy as np
@@ -22,7 +23,7 @@ IMG_SIZE = 32     # input image size, CIFAR-10 is 32x32
 BATCH_SIZE = 128  # for training batch size
 timesteps = 16    # how many steps for a noisy image into clear
 time_bar = 1 - np.linspace(0, 1.0, timesteps + 1) # linspace for timesteps
-epochs = 50
+epochs = 100
 model_save_path = 'outputs/models'
 output_directory = 'outputs/images'
 
