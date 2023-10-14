@@ -33,7 +33,7 @@ model = func.load_models(model_save_path=model_save_path)
 # generate imeges
 xs = []
 for i in range (1):
-    x = func.predict(IMG_SIZE=IMG_SIZE, timesteps=timesteps, model=model)
+    x = func.predict(IMG_SIZE=IMG_SIZE, timesteps=timesteps, model=model, n_images=8)
     func.save_images_as_png(images=x, output_dir=output_directory, epoch=0)
 
 '''

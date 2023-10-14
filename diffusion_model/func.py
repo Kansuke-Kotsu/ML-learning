@@ -34,7 +34,7 @@ def forward_noise(x, t, time_bar):
     img_b = x * (1 - b) + noise * b
     return img_a, img_b
     
-# generate random vector
+# generate random vector (time)
 def generate_ts(num, timesteps):
     return np.random.randint(0, timesteps, size=num)
 
@@ -109,24 +109,6 @@ def make_model(IMG_SIZE):
     model = tf.keras.models.Model([x_input, x_ts_input], x)
     return model
 
-
-def predict(IMG_SIZE, timesteps, model, x_idx=None):
-    x = np.random.normal(size=(32, IMG_SIZE, IMG_SIZE, 3))
-    for i in trange(timesteps):
-        t = i
-        x = model.predict([x, np.full((32), t)], verbose=0)
-    return x
-    
-def predict_step(IMG_SIZE, timesteps, model):
-    xs = []
-    x = np.random.normal(size=(8, IMG_SIZE, IMG_SIZE, 3))
-    for i in trange(timesteps):
-        t = i
-        x = model.predict([x, np.full((8),  t)], verbose=0)
-        if i % 2 == 0:
-            xs.append(x[0])
-    return xs
-
 def train_one(x_img, model, timesteps, time_bar):
     x_ts = generate_ts(len(x_img), timesteps=timesteps)
     x_a, x_b = forward_noise(x_img, x_ts, time_bar=time_bar)
@@ -143,6 +125,23 @@ def train(X_train, BATCH_SIZE, R, model, timesteps, time_bar):
             pg = (j / total) * 100
             if j % 5 == 0:
                 bar.set_description(f'loss: {loss:.5f}, p: {pg:.2f}%')
+ 
+def predict(IMG_SIZE, timesteps, model, n_images, x_idx=None):
+    x = np.random.normal(size=(n_images, IMG_SIZE, IMG_SIZE, 3))
+    for i in trange(timesteps):
+        t = i
+        x = model.predict([x, np.full((n_images), t)], verbose=0)
+    return x
+    
+def predict_step(IMG_SIZE, timesteps, model):
+    xs = []
+    x = np.random.normal(size=(8, IMG_SIZE, IMG_SIZE, 3))
+    for i in trange(timesteps):
+        t = i
+        x = model.predict([x, np.full((8),  t)], verbose=0)
+        if i % 2 == 0:
+            xs.append(x[0])
+    return xs
  
 def save_images_as_png(images, output_dir, epoch):
     if not os.path.exists(output_dir):
