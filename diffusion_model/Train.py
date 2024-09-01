@@ -57,7 +57,7 @@ for i in range(epochs):
     # generate images & show result 
     x = func.predict(IMG_SIZE=IMG_SIZE, timesteps=timesteps, model=model, n_images=1)
     func.save_images_as_png(images=x, output_dir=output_directory, epoch=0)
-   
+    
     # rest PC
     time.sleep(1*60)
 
